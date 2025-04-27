@@ -1,0 +1,41 @@
+# Build directories
+build/
+out/
+
+# IDE files
+.vs/
+.vscode/
+.idea/
+.cahce
+*.swp
+*.user
+CMakeUserPresets.json
+
+# Compiled binaries and libraries
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.obj
+*.a
+*.lib
+
+# Generated files
+compile_commands.json
+
+# Dependency directories
+vcpkg_installed/
+
+# Documentation builds
+docs/html/
+docs/xml/
+
+# temporary files
+tmp
+temp
+
+# Backup files
+*~
+*.bak
+*.tmp
