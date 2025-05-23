@@ -9,7 +9,7 @@
         {
             "name": "msvc-base",
             "displayName": "MSVC base",
-            "generator": "Ninja",
+            "generator": "Ninja Multi-Config",
             "hidden": true,
             "binaryDir": "${sourceDir}/build/${presetName}",
             "vendor": {
@@ -21,139 +21,70 @@
             },
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "cl.exe",
-                "CMAKE_CXX_COMPILER": "cl.exe"
+                "CMAKE_CXX_COMPILER": "cl.exe",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
             }
         },
         {
             "name": "gcc-base",
             "displayName": "GCC base",
-            "generator": "Ninja",
+            "generator": "Ninja Multi-Config",
             "hidden": true,
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "gcc",
-                "CMAKE_CXX_COMPILER": "g++"
+                "CMAKE_CXX_COMPILER": "g++",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
             }
         },
         {
             "name": "clang-base",
             "displayName": "Clang base",
-            "generator": "Ninja",
+            "generator": "Ninja Multi-Config",
             "hidden": true,
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "clang",
-                "CMAKE_CXX_COMPILER": "clang++"
+                "CMAKE_CXX_COMPILER": "clang++",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
             }
         },
         {
             "name": "clang-cl-base",
             "displayName": "Clang-CL base",
-            "generator": "Ninja",
+            "generator": "Ninja Multi-Config",
             "hidden": true,
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "clang-cl",
-                "CMAKE_CXX_COMPILER": "clang-cl"
-            }
-        },
-        {
-            "name": "debug",
-            "displayName": "debug",
-            "hidden": true,
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_COMPILER": "clang-cl",
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
             }
         },
         {
-            "name": "release",
-            "displayName": "release",
-            "hidden": true,
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
-            }
-        },
-        {
-            "name": "relwithdebinfo",
-            "displayName": "relwithdebinfo",
-            "hidden": true,
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
-            }
-        },
-        {
-            "name": "minsizerel",
-            "displayName": "minsizerel",
-            "hidden": true,
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "MinSizeRel"
-            }
-        },
-        {
-            "name": "clang-debug-x64",
-            "displayName": "Clang debug x64",
-            "generator": "Ninja",
+            "name": "clang-x64",
+            "displayName": "Clang x64",
+            "generator": "Ninja Multi-Config",
             "inherits": [
-                "clang-base",
-                "debug"
+                "clang-base"
             ],
             "hidden": false
         },
         {
-            "name": "clang-release-x64",
-            "displayName": "Clang release x64",
-            "generator": "Ninja",
+            "name": "gcc-x64",
+            "displayName": "GCC x64",
+            "generator": "Ninja Multi-Config",
             "inherits": [
-                "clang-base",
-                "release"
+                "gcc-base"
             ],
             "hidden": false
         },
         {
-            "name": "gcc-debug-x64",
-            "displayName": "GCC debug x64",
-            "generator": "Ninja",
+            "name": "msvc-x64",
+            "displayName": "MSVC x64",
+            "generator": "Ninja Multi-Config",
             "inherits": [
-                "gcc-base",
-                "debug"
-            ],
-            "hidden": false
-        },
-        {
-            "name": "gcc-release-x64",
-            "displayName": "GCC release x64",
-            "generator": "Ninja",
-            "inherits": [
-                "gcc-base",
-                "release"
-            ],
-            "hidden": false
-        },
-        {
-            "name": "msvc-debug-x64",
-            "displayName": "MSVC debug x64",
-            "generator": "Ninja",
-            "inherits": [
-                "msvc-base",
-                "debug"
-            ],
-            "vendor": {
-                "microsoft.com/VisualStudioSettings/CMake/1.0": {
-                    "hostOS": [
-                        "Windows"
-                    ]
-                }
-            },
-            "hidden": false
-        },
-        {
-            "name": "msvc-release-x64",
-            "displayName": "MSVC release x64",
-            "generator": "Ninja",
-            "inherits": [
-                "msvc-base",
-                "release"
+                "msvc-base"
             ],
             "vendor": {
                 "microsoft.com/VisualStudioSettings/CMake/1.0": {
@@ -167,47 +98,75 @@
     ],
     "buildPresets": [
         {
-            "name": "clang-release-x64",
-            "displayName": "Clang release",
-            "configurePreset": "clang-release-x64",
+            "name": "clang-debug",
+            "displayName": "Clang Debug",
+            "configurePreset": "clang-x64",
+            "configuration": "Debug",
             "hidden": false
         },
         {
-            "name": "clang-debug-x64",
-            "displayName": "Clang debug x64",
-            "configurePreset": "clang-debug-x64",
+            "name": "clang-release",
+            "displayName": "Clang Release",
+            "configurePreset": "clang-x64",
+            "configuration": "Release",
             "hidden": false
         },
         {
-            "name": "gcc-release-x64",
-            "displayName": "GCC release x64",
-            "configurePreset": "gcc-release-x64",
+            "name": "clang-relwithdebinfo",
+            "displayName": "Clang RelWithDebInfo",
+            "configurePreset": "clang-x64",
+            "configuration": "RelWithDebInfo",
             "hidden": false
         },
         {
-            "name": "gcc-debug-x64",
-            "displayName": "GCC debug x64",
-            "configurePreset": "gcc-debug-x64",
+            "name": "gcc-debug",
+            "displayName": "GCC Debug",
+            "configurePreset": "gcc-x64",
+            "configuration": "Debug",
             "hidden": false
         },
         {
-            "name": "msvc-release-x64",
-            "displayName": "MSVC release x64",
-            "configurePreset": "msvc-release-x64",
+            "name": "gcc-release",
+            "displayName": "GCC Release",
+            "configurePreset": "gcc-x64",
+            "configuration": "Release",
             "hidden": false
         },
         {
-            "name": "msvc-debug-x64",
-            "displayName": "MSVC debug x64",
-            "configurePreset": "msvc-debug-x64",
+            "name": "gcc-relwithdebinfo",
+            "displayName": "GCC RelWithDebInfo",
+            "configurePreset": "gcc-x64",
+            "configuration": "RelWithDebInfo",
+            "hidden": false
+        },
+        {
+            "name": "msvc-debug",
+            "displayName": "MSVC Debug",
+            "configurePreset": "msvc-x64",
+            "configuration": "Debug",
+            "hidden": false
+        },
+        {
+            "name": "msvc-release",
+            "displayName": "MSVC Release",
+            "configurePreset": "msvc-x64",
+            "configuration": "Release",
+            "hidden": false
+        },
+        {
+            "name": "msvc-relwithdebinfo",
+            "displayName": "MSVC RelWithDebInfo",
+            "configurePreset": "msvc-x64",
+            "configuration": "RelWithDebInfo",
             "hidden": false
         }
     ],
     "testPresets": [
         {
-            "name": "clang-debug-x64-test",
-            "displayName": "Clang x64 调试测试",
-            "configurePreset": "clang-debug-x64",
+            "name": "clang-debug-test",
+            "displayName": "Clang 调试测试",
+            "configurePreset": "clang-x64",
+            "configuration": "Debug",
             "output": {
                 "verbosity": "verbose",
                 "outputOnFailure": true
@@ -218,9 +177,10 @@
             }
         },
         {
-            "name": "clang-release-x64-test",
-            "displayName": "Clang x64 发布测试",
-            "configurePreset": "clang-release-x64",
+            "name": "clang-release-test",
+            "displayName": "Clang 发布测试",
+            "configurePreset": "clang-x64",
+            "configuration": "Release",
             "output": {
                 "verbosity": "verbose",
                 "outputOnFailure": true
@@ -233,38 +193,38 @@
     ],
     "workflowPresets": [
         {
-            "name": "clang-dev-x64-workflow",
-            "displayName": "clang dev x64 workflow",
+            "name": "clang-dev-workflow",
+            "displayName": "clang dev workflow",
             "steps": [
                 {
                     "type": "configure",
-                    "name": "clang-debug-x64"
+                    "name": "clang-x64"
                 },
                 {
                     "type": "build",
-                    "name": "clang-debug-x64"
+                    "name": "clang-debug"
                 },
                 {
                     "type": "test",
-                    "name": "clang-debug-x64-test"
+                    "name": "clang-debug-test"
                 }
             ]
         },
         {
-            "name": "clang-release-x64-workflow",
-            "displayName": "clang release x64 workflow",
+            "name": "clang-release-workflow",
+            "displayName": "clang release workflow",
             "steps": [
                 {
                     "type": "configure",
-                    "name": "clang-release-x64"
+                    "name": "clang-x64"
                 },
                 {
                     "type": "build",
-                    "name": "clang-release-x64"
+                    "name": "clang-release"
                 },
                 {
                     "type": "test",
-                    "name": "clang-release-x64-test"
+                    "name": "clang-release-test"
                 }
             ]
         }
