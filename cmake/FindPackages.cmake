@@ -5,7 +5,7 @@
 function(find_required_packages)
     # 在此添加项目所需的所有依赖包
     # 例如：
-    # find_package(fmt REQUIRED)
-    # find_package(spdlog REQUIRED)
-    # find_package(nlohmann_json REQUIRED)
+    # find_package(fmt CONFIG REQUIRED)
+    # find_package(spdlog CONFIG REQUIRED)
+    # find_package(nlohmann_json CONFIG REQUIRED)
 endfunction()
