@@ -7,10 +7,6 @@ set(CMAKE_CXX_STANDARD 23) # 使用 C++23
 set(CMAKE_CXX_STANDARD_REQUIRED ON) # 强制使用指定的标准
 set(CMAKE_CXX_EXTENSIONS OFF) # 不使用编译器特定扩展
 
-# 构建选项
-option(ENABLE_WARNINGS "启用警告" ON)
-option(ENABLE_WARNINGS_AS_ERRORS "将警告视为错误" OFF)
-
 # vcpkg 配置
 if(DEFINED ENV{VCPKG_ROOT})
     set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake CACHE STRING "Vcpkg 工具链文件")
@@ -26,17 +22,16 @@ if(MSVC)
     set(CMAKE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/pdb")
 else()
     # 非 MSVC 编译器 - 尝试使用 sccache 或 ccache 加速编译
-    find_program(SCCACHE sccache)
-    find_program(CCACHE ccache) 
-    if(NOT SCCACHE STREQUAL "SCCACHE-NOTFOUND")
-        message(STATUS "sccache found, configuring sccache.")
-        set(CMAKE_C_COMPILER_LAUNCHER ${SCCACHE})
-        set(CMAKE_CXX_COMPILER_LAUNCHER ${SCCACHE})
-    elseif(NOT CCACHE STREQUAL "CCACHE-NOTFOUND")
-        message(STATUS "ccache found, configuring ccache.")
-        set(CMAKE_C_COMPILER_LAUNCHER ${CCACHE})
-        set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE})
-    else()
-        message(STATUS "sccache and ccache not found, skipping cache configuration.")
-    endif()
+    set(CACHE_TOOLS scache ccache)
+
+    foreach(TOOL ${CACHE_TOOLS})
+        find_program(CACHE_EXECUTABLE ${TOOL})
+
+        if(CACHE_EXECUTABLE)
+            message(STATUS "Using ${TOOL} for compiler caching.")
+            set(CMAKE_C_COMPILER_LAUNCHER "${CACHE_EXECUTABLE}")
+            set(CMAKE_CXX_COMPILER_LAUNCHER "${CACHE_EXECUTABLE}")
+            break()
+        endif()
+    endforeach()
 endif()

@@ -5,9 +5,6 @@
 # 添加可执行文件
 add_executable(${PROJECT_NAME} main.cpp)
 
-# 应用项目编译器选项
-set_project_compiler_options(${PROJECT_NAME})
-
 # 链接库
 # target_link_libraries(${PROJECT_NAME} PRIVATE ...)
 
